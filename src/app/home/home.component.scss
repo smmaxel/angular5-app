@@ -1,9 +1,113 @@
-.logo {
-  width: 100px;
+.menu-box {
+  font-family: sans-serif;
 }
 
-q {
-  font-style: italic;
-  font-size: 1.2rem;
-  quotes: "« " " »";
+.menu-box a {
+  transition: 0.5s all;
 }
+
+.menu-header {
+  background: #333;
+  padding: 2em 0 2em 3em;
+  color: #fff;
+  text-transform: capitalize;
+  font-size: 0.85em;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.menu-box {
+  font-family: Raleway;
+}
+
+h3.menu-header {
+  background: #333;
+  padding: 2em 0 2em 3em;
+  color: #fff;
+  text-transform: capitalize;
+  font-size: 0.85em;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+ul.nav {
+  padding: 14px 0;
+  list-style: none;
+  background: #68656a;
+}
+
+ul.nav li:hover {
+  background: #333;
+  color: #fff;
+}
+
+ul.nav li {
+  width: 100%;
+}
+
+ul.nav li a {
+  width: 100%;
+  color: #fff;
+  font-size: 0.85em;
+  text-transform: capitalize;
+  font-weight: 400;
+  font-family: sans-serif;
+  display: block;
+  padding: 10px 15px 10px 40px;
+  cursor: pointer;
+}
+
+ul.nav li a:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: #000;
+}
+
+.content-filter {
+  border-bottom: 1px solid #ccc;
+  margin-top: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.label-filter {
+  margin: 7px 10px 0 0;
+}
+
+.product-grid-row {
+  padding: 0;
+}
+
+.product-holder {
+  // border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.product {
+  border: 1px dashed #ccc;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+
+  .heading {
+    font-size: 13px;
+    font-weight: bold;
+    margin: 15px auto 6px;
+  }
+
+  .description {
+    font-size: 12px;
+    margin: 0 0 10px;
+  }
+
+  .price-rating {
+    .price {
+      font-size: 14px;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+  }
+}
+
+

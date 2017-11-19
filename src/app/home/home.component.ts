@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { QuoteService } from './quote.service';
 
@@ -12,6 +13,22 @@ export class HomeComponent implements OnInit {
 
   quote: string;
   isLoading: boolean;
+  filter: string = "Best selling (default)";
+  filters: string[] = [
+    "Best selling (dafault)",
+    "Newest",
+    "Price (low-high)",
+    "Price (high-low)",
+    "Best discount",
+    "Name (A-Z)"
+  ];
+
+  allProducts: any[] = [
+    {},{},{},{},
+    {},{},{},{},
+    {},{},{},{},
+    {},{},{},{},
+  ];
 
   constructor(private quoteService: QuoteService) {}
 
@@ -20,6 +37,10 @@ export class HomeComponent implements OnInit {
     this.quoteService.getRandomQuote({ category: 'dev' })
       .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((quote: string) => { this.quote = quote; });
+  }
+
+  changeFilter(index: number) {
+    this.filter = this.filters[index];
   }
 
 }

@@ -20,6 +20,8 @@ export function createHttpService(backend: ConnectionBackend,
 }
 
 @NgModule({
+
+  // imported modules
   imports: [
     CommonModule,
     HttpModule,
@@ -27,10 +29,14 @@ export function createHttpService(backend: ConnectionBackend,
     NgbModule,
     RouterModule
   ],
+
+  // imported components
   declarations: [
     HeaderComponent,
     ShellComponent
   ],
+
+  // uased providers (directives and services)
   providers: [
     AuthenticationService,
     AuthenticationGuard,

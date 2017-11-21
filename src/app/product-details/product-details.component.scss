@@ -1,0 +1,53 @@
+.product-details {
+  padding-bottom: 30px;
+  border-bottom: 1px solid #ccc;
+}
+
+.gallery {
+  padding: 10px;
+
+  .main-image {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .thumbnails {
+    margin-top: 20px;
+
+    img {
+      width: 120px;
+      padding: 0 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+.name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.description {
+  font-size: 14px;
+
+  .heading {
+    font-weight: bold;
+  }
+}
+
+.rating {
+  label {
+    text-decoration: underline;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+}
+
+.reviews {
+  margin: 20px;
+}

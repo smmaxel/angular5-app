@@ -15,9 +15,15 @@
     margin-top: 20px;
 
     img {
-      width: 120px;
-      padding: 0 10px;
+      width: 86px;
+      margin: 0 10px !important;
       cursor: pointer;
+      border: 3px solid transparent;
+
+      &.active {
+        border: 3px solid #f90;
+        border-radius: 4px;
+      }
     }
   }
 }

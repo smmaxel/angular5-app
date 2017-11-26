@@ -25,35 +25,89 @@
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
           </p>
           <p class="rating">
-              <ngb-rating [rate]="currentRate" max="5" [readonly]="true"></ngb-rating>
-            <label>5 review</label>
+            <label style="text-decoration: none; margin-left: 0;">Rating:</label>
+            <ngb-rating [rate]="currentRate" max="5" [readonly]="true"></ngb-rating>
+            <label>5 reviews</label>
           </p>
           <div class="customization">
-            color:
+            <label class="d-inline-block align-top">Color:</label>
+            <div class="colors d-inline-block">
+              <span class="d-inline"
+              *ngFor="let color of colors"
+              [style.background]="color"
+              [ngClass]="{'active': selectedColor == color }"
+              (click)="selectedColor = color"
+              ngbPopover="{{color}}"
+              placement="top"
+              ></span>
+            </div>
             <br>
-            <label>Material:</label>
+            <label style="margin-top: 10px;">Material:</label>
             <select class="custom-select">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option *ngFor="let material of materials" [value]="material">{{ material }}</option>
               </select>
             <br>
-            quantity
+            <label style="margin-top: 10px;">Quantity:</label>
+            <div class="quantity-selector">
+                <i class="fa fa-minus" (click)="decreaseQuantity()" aria-hidden="true"></i>
+                <input
+                type="text"
+                class=""
+                [(ngModel)]="quantity"
+                (keypress)="validateQuantity($event)"
+                (blur)="onBlurQuantity()"
+                maxlength="3"
+                autocomplete="off">
+                <i class="fa fa-plus" (click)="increaseQuantity()" aria-hidden="true"></i>
+            </div>
             <br>
-            add to cart button
+            <button type="button" style="margin-top: 10px;" class="btn btn-success">Add to Cart</button>
           </div>
       </div>
     </div>
 
   </div>
 
-  <div class="row" style="height: 400px; border: 1px solid red; border-top: none">
-    <div class="reviews">
-        <p class="name">Reviews</p>
-        <div class="reviews-content">
-          
+  <div class="reviews">
+      <p class="name">Reviews</p>
+      <div class="row reviews-content" *ngFor="let review of reviews">
+        <div class="col-md-8">
+          <div class="review-description">
+              <ngb-rating [rate]="currentRate" max="5" [readonly]="true"></ngb-rating>
+              <label>{{currentRate}}/5</label>
+              <h6>Great product and value</h6>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          </div>
+
+          <div class="helpfull">
+            <label>Helpfull?</label>
+              <button type="button" class="btn btn-secondary">
+                  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                  44
+              </button>
+              <button type="button" class="btn btn-secondary">
+                  <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                  101
+              </button>
+          </div>
+
         </div>
-    </div>
+        
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
+          <div class="review-rating">
+            <label>Quality:</label>
+            <ngb-rating [rate]="currentRate" max="5" [readonly]="true"></ngb-rating>
+            
+            <label>Design:</label>
+            <ngb-rating [rate]="currentRate" max="5" [readonly]="true"></ngb-rating>
+            
+            <label>Comfort:</label>
+            <ngb-rating [rate]="currentRate" max="5" [readonly]="true"></ngb-rating>
+            
+            <label>Studirnes:</label>
+            <ngb-rating [rate]="currentRate" max="5" [readonly]="true"></ngb-rating>
+          </div>
+        </div>
+      </div>
   </div>
 </div>

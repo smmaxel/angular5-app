@@ -19,8 +19,4 @@ const routes: Routes = Route.withShell([
   exports: [RouterModule],
   providers: []
 })
-export class ProductDetailsRoutingModule {
-
-  currentRate: any = 4;
-
-}
+export class ProductDetailsRoutingModule { }

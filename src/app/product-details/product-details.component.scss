@@ -1,0 +1,184 @@
+ngb-rating {
+  &:focus {
+    outline: none;
+  }
+}
+
+
+.product-details {
+  padding-bottom: 30px;
+  border-bottom: 1px solid #ccc;
+}
+
+.gallery {
+  padding: 10px;
+
+  .main-image {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .thumbnails {
+    margin-top: 20px;
+
+    img {
+      width: 86px;
+      margin: 0 10px !important;
+      cursor: pointer;
+
+      &.active {
+        border: 3px solid #f90;
+        border-radius: 4px;
+      }
+
+      &:hover {
+        border: 3px solid #f90;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+.name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.description {
+  font-size: 14px;
+
+  .heading {
+    font-weight: bold;
+  }
+}
+
+.rating {
+  label {
+    text-decoration: underline;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+}
+
+.colors {
+  // height: 30px;
+
+  span {
+    width: 26px;
+    height: 26px;
+    display: inline-block !important;
+    margin-right: 10px;
+
+    &.active {
+      border: 3px solid #f90;
+      border-radius: 4px;
+    }
+
+    &:hover {
+      border: 3px solid #f90;
+      border-radius: 4px;
+    }
+  }
+}
+
+.quantity-selector {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  height: 30px;
+  padding: 0 25px;
+  user-select: none;
+
+  input {
+    border: 0 none;
+    display: block;
+    width: 60px;
+    line-height: 14px;
+    margin-top: 6px;
+    text-align: center;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  i {
+    color: #555;
+    position: absolute;
+    top: 4px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 3px;
+
+    &.fa-minus {
+      left: 0;
+      padding-left: 7px;
+    }
+
+    &.fa-plus {
+      right: 0;
+      padding-left: 2px;
+    }
+  }
+}
+
+.reviews {
+  margin: 20px;
+
+  p {
+    margin-bottom: 30px;
+  }
+
+  .reviews-content {
+    border: 1px solid black;
+    min-height: 300px;
+    margin-bottom: 50px;
+  }
+}
+
+
+.review-rating {
+  width: 200px;
+  height: 225px;
+  padding: 15px;
+  border: 2px solid black;
+  border-radius: 1px;
+
+  label {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  ngb-rating {
+    margin-left: 20px;
+  }
+}
+
+.review-description {
+  margin-top: 20px;
+  
+  ngb-rating {
+    font-size: 20px;
+  }
+}
+
+.helpfull {
+  margin-bottom: 20px;
+
+  label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+}
+
+

@@ -11,6 +11,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { ProductDetailsModule } from './product-details/product-details.module';
+import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 import { AboutModule } from './about/about.module';
 import { LoginModule } from './login/login.module';
 
@@ -24,6 +25,7 @@ import { LoginModule } from './login/login.module';
     SharedModule,
     HomeModule,
     ProductDetailsModule,
+    ShoppingCartModule,
     AboutModule,
     LoginModule,
     AppRoutingModule

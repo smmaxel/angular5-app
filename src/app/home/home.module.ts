@@ -14,6 +14,7 @@ import { HomeComponent } from './home.component';
 // services
 import { QuoteService } from './quote.service';
 import { FormsModule } from '@angular/forms';
+import { DummyDataService } from '../core/dummy-data.service';
 
 @NgModule({
 
@@ -34,7 +35,8 @@ import { FormsModule } from '@angular/forms';
 
   // uased providers (directives and services)
   providers: [
-    QuoteService
+    QuoteService,
+    DummyDataService
   ]
 })
 export class HomeModule { }

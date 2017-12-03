@@ -19,3 +19,27 @@
     outline: none;
   }
 }
+
+i {
+  font-size: 24px;
+}
+
+.cart,
+.search {
+  margin-right: 20px;
+}
+
+.search {
+  input {
+    background-color: #e5e5e5;
+    padding-left: 25px;
+  }
+
+  i {
+    position: absolute;
+    margin-top: 8px;
+    margin-left: 4px;
+    font-size: 20px;
+  }
+}
+

@@ -8,6 +8,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class ShoppingCartComponent implements OnInit {
 
+  cartItems: any[] = [{}, {}, {}, {}];
+
   constructor(
     private router: Router,
     private route: ActivatedRoute

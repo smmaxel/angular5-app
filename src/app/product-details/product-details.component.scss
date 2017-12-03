@@ -101,7 +101,7 @@ ngb-rating {
     display: block;
     width: 60px;
     line-height: 14px;
-    margin-top: 6px;
+    margin-top: 4px;
     text-align: center;
 
     &:focus {
@@ -166,7 +166,7 @@ ngb-rating {
 
 .review-description {
   margin-top: 20px;
-  
+
   ngb-rating {
     font-size: 20px;
   }

@@ -8,7 +8,6 @@
     "max-nesting-depth": 3,
     "selector-max-compound-selectors": 3,
     "selector-max-specificity": "0,3,2",
-    "declaration-no-important": true,
     "at-rule-no-vendor-prefix": true,
     "media-feature-name-no-vendor-prefix": true,
     "property-no-vendor-prefix": true,
@@ -21,6 +20,9 @@
     "selector-max-universal": 0,
     "unit-whitelist": ["px", "%", "em", "rem", "vw", "vh", "deg", "s"],
     "max-empty-lines": 2,
-    "max-line-length": 120
+    "max-line-length": 120,
+    "selector-type-no-unknown": [ true, {
+            "ignoreTypes": ["/^[a-zA-Z]([a-zA-Z0-9]*-[a-zA-Z0-9]+)+/"],
+        } ]
   }
 }

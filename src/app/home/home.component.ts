@@ -13,21 +13,21 @@ export class HomeComponent implements OnInit {
 
   quote: string;
   isLoading: boolean;
-  filter: string = "Best selling (default)";
+  filter: string = 'Best selling (default)';
   filters: string[] = [
-    "Best selling (dafault)",
-    "Newest",
-    "Price (low-high)",
-    "Price (high-low)",
-    "Best discount",
-    "Name (A-Z)"
+    'Best selling (dafault)',
+    'Newest',
+    'Price (low-high)',
+    'Price (high-low)',
+    'Best discount',
+    'Name (A-Z)'
   ];
 
   allProducts: any[] = [
-    {},{},{},{},
-    {},{},{},{},
-    {},{},{},{},
-    {},{},{},{},
+    {}, {}, {}, {},
+    {}, {}, {}, {},
+    {}, {}, {}, {},
+    {}, {}, {}, {},
   ];
 
   constructor(private quoteService: QuoteService) {}

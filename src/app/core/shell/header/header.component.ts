@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout()
-      .subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
+      .subscribe(() => this.router.navigate(['/home'], { replaceUrl: true }));
   }
 
   get currentLanguage(): string {
@@ -41,6 +41,7 @@ export class HeaderComponent implements OnInit {
   }
 
   get username(): string {
+    console.log('test');
     const credentials = this.authenticationService.credentials;
     return credentials ? credentials.username : null;
   }

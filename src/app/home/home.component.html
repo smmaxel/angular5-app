@@ -1,36 +1,7 @@
 <div class="container"> <!-- -fluid -->
-  <!-- <div class="jumbotron text-center">
-    <h1>
-      <img class="logo" src="assets/ngx-rocket-logo.png" alt="angular logo"/>
-      <span translate>Hello world !</span>
-    </h1>
-    <app-loader [isLoading]="isLoading"></app-loader>
-    <q [hidden]="isLoading">{{quote}}</q>
-  </div> -->
   <div class="row">
-    
-    <!-- Left navigation menu -->
-    <div class="col-md-3">
-      <div class="menu-box">
-        <h3 class="menu-header">Menu</h3>
-        <ul class="nav">
-          <li><a>About</a></li>
-          <li><a>Living Room</a></li>
-          <li><a>Office Furniture</a></li>
-          <li><a>Bean Bags</a></li>
-          <li><a>Tables</a></li>
-          <li><a>Sofas</a></li>
-          <li><a>Wardrobes</a></li>
-          <li><a>Beds</a></li>
-          <li><a>Typo</a></li>
-          <li><a>Chairs</a></li>
-          <li><a>Kids Beds</a></li>
-      </ul>
-      </div>
-    </div>
-
     <!-- Main content -->
-    <div class="col-md-9">
+    <div class="col-md-12">
       <div class="content-filter">
         <div class="dropdown pull-right">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -49,14 +20,12 @@
       <div class="product-grid-row row" *ngFor="let products of allProducts | chunkBy: 4">
         <div class="col-md-3 col-sm-6 col-xs-12 product-holder" *ngFor="let product of products">
           <div class="product">
-            <img src="./../../assets/pic1.jpg" class="img-fluid mx-auto d-block">
+            <img [src]="product.coverImg" class="img-fluid mx-auto d-block">
             <div class="product-details">
-              <p class="heading">heading goes here</p>
-              <p class="description">
-                  Product Four descripton goes hire to provide more information about the product
-              </p>
+              <p class="heading">{{ product.name }}</p>
+              <p class="description">{{ product.shortDiscription }}</p>
               <div class="price-rating">
-                <div class="pull-right price">$132</div>
+                <div class="pull-right price">{{ product.price | currency:'USD'}}</div>
                 <div class="clearfix"></div>
               </div>
             </div>

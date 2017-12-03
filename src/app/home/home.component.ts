@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DummyDataService } from '../core/dummy-data.service';
 
-import { QuoteService } from './quote.service';
+import { Product } from '../core/models/product.interface';
 
 @Component({
   selector: 'app-home',
@@ -11,32 +11,21 @@ import { QuoteService } from './quote.service';
 })
 export class HomeComponent implements OnInit {
 
-  quote: string;
-  isLoading: boolean;
-  filter: string = "Best selling (default)";
+  allProducts: Product[];
+  filter: string = 'Best selling (default)';
+
   filters: string[] = [
-    "Best selling (dafault)",
-    "Newest",
-    "Price (low-high)",
-    "Price (high-low)",
-    "Best discount",
-    "Name (A-Z)"
+    'Best selling (dafault)',
+    'Price (low-high)',
+    'Price (high-low)',
+    'Best rated',
+    'Name (A-Z)'
   ];
 
-  allProducts: any[] = [
-    {},{},{},{},
-    {},{},{},{},
-    {},{},{},{},
-    {},{},{},{},
-  ];
-
-  constructor(private quoteService: QuoteService) {}
+  constructor(private productService: DummyDataService) {}
 
   ngOnInit() {
-    this.isLoading = true;
-    this.quoteService.getRandomQuote({ category: 'dev' })
-      .pipe(finalize(() => { this.isLoading = false; }))
-      .subscribe((quote: string) => { this.quote = quote; });
+    this.allProducts = this.productService.getProducts();
   }
 
   changeFilter(index: number) {

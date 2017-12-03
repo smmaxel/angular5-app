@@ -3,7 +3,7 @@
     <!-- <a class="navbar-brand" href="https://github.com/ngx-rocket" translate>APP_NAME</a> -->
     
     <!-- ToDo: This is a place where Some Logo will go -->
-    <img class="navbar-logo" src="assets/ngx-rocket-logo.png" alt="angular logo"/>
+    <img class="navbar-logo" src="assets/ngx-rocket-logo.png" routerLink="/home" alt="angular logo"/>
     <!-- <span class="navbar-brand" translate>APP_NAME</span> -->
     
     <button class="navbar-toggler" type="button" aria-controls="navbar-menu"
@@ -14,42 +14,35 @@
 
     <div id="navbar-menu" class="collapse navbar-collapse float-xs-none" [ngbCollapse]="menuHidden">
       
-      <!-- Navbar links -->
-      <div class="navbar-nav">
-        <a class="nav-item nav-link text-uppercase" routerLink="/home" routerLinkActive="active">
-          <i class="fa fa-home"></i>
-          <span translate>Home</span>
-        </a>
-        <a class="nav-item nav-link text-uppercase" routerLink="/about" routerLinkActive="active">
-          <i class="fa fa-question-circle"></i>
-          <span translate>About</span>
-        </a>
-      </div>
-
-      <!-- Navbar login and language tooggle -->
       <div class="navbar-nav ml-auto">
-        <!-- <div class="nav-item" ngbDropdown placement="bottom-right">
-          <a id="language-dropdown" class="nav-link" ngbDropdownToggle>{{currentLanguage}}</a>
-          <div ngbDropdownMenu aria-labelledby="language-dropdown">
-            <button class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">
-              {{language}}
-            </button>
-          </div>
-        </div> -->
+        
+        <div class="nav-item search">
+            <i class="fa fa-search text-muted" aria-hidden="true"></i>
+            <input id="typeahead-format" type="text" class="form-control"
+            placeholder="Search..."
+            [(ngModel)]="searchTerm"
+            [ngbTypeahead]="search"
+            [resultFormatter]="formatter"
+            (selectItem)="itemSelected($event)">
+        </div>
 
-        <!-- ToDo: navigate to wish list -->
+        <div class="nav-item cart d-inline-block">
+          <a class="nav-link" routerLink="/shopping-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+        </div>
 
-        <!-- ToDo: navigate to shopping cart -->
-
-        <div class="nav-item" ngbDropdown placement="bottom-right">
+        <div class="nav-item d-inline-block" ngbDropdown placement="bottom-right">
           <a id="user-dropdown" class="nav-link" ngbDropdownToggle>
             <i class="fa fa-user-circle"></i>
           </a>
-          <div ngbDropdownMenu aria-labelledby="user-dropdown">
+          <div *ngIf="username" ngbDropdownMenu aria-labelledby="user-dropdown">
             <h6 class="dropdown-header">
-              <span translate>Logged in as</span> <b>{{username}}</b></h6>
+              <span>Logged in as</span> <b>{{username}}</b></h6>
             <div class="dropdown-divider"></div>
-            <button class="dropdown-item" (click)="logout()" translate>Logout</button>
+            <button class="dropdown-item" (click)="logout()">Logout</button>
+          </div>
+          
+          <div *ngIf="!username" ngbDropdownMenu aria-labelledby="user-dropdown">
+            <button class="dropdown-item" routerLink="/login">Log in</button>
           </div>
         </div>
       </div>

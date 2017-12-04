@@ -1,25 +1,20 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <!-- <a class="navbar-brand" href="https://github.com/ngx-rocket" translate>APP_NAME</a> -->
-    
-    <!-- ToDo: This is a place where Some Logo will go -->
     <img class="navbar-logo" src="assets/ngx-rocket-logo.png" routerLink="/home" alt="angular logo"/>
-    <!-- <span class="navbar-brand" translate>APP_NAME</span> -->
+    <span class="navbar-brand">Angular 5 App</span>
     
     <button class="navbar-toggler" type="button" aria-controls="navbar-menu"
             aria-label="Toggle navigation" (click)="toggleMenu()" [attr.aria-expanded]="!menuHidden">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-
     <div id="navbar-menu" class="collapse navbar-collapse float-xs-none" [ngbCollapse]="menuHidden">
       
       <div class="navbar-nav ml-auto">
-        
         <div class="nav-item search">
             <i class="fa fa-search text-muted" aria-hidden="true"></i>
             <input id="typeahead-format" type="text" class="form-control"
-            placeholder="Search..."
+            placeholder="Start typing..."
             [(ngModel)]="searchTerm"
             [ngbTypeahead]="search"
             [resultFormatter]="formatter"

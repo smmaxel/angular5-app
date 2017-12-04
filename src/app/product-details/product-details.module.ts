@@ -7,6 +7,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductDetailsRoutingModule } from './product-details-routing.module';
 import { ProductDetailsComponent } from './product-details.component';
 
+import { DummyDataService } from '../core/dummy-data.service';
+import { LocalStorageService } from '../core/localstorage.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +21,10 @@ import { ProductDetailsComponent } from './product-details.component';
   ],
   declarations: [
     ProductDetailsComponent
+  ],
+  providers: [
+    DummyDataService,
+    LocalStorageService
   ]
 })
 export class ProductDetailsModule {}

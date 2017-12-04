@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { element } from 'protractor';
 import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
+import { DummyDataService } from '../core/dummy-data.service';
+import { LocalStorageService } from '../core/localstorage.service';
+
+import { Product } from '../core/models/product.interface';
 
 @Component({
   selector: 'app-product',
@@ -11,41 +15,30 @@ import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  currentRate: number = 4;
-  images: string[] = [
-    './../../assets/pic1.jpg',
-    './../../assets/pic2.jpg',
-    './../../assets/pic3.jpg',
-    './../../assets/pic4.jpg',
-    './../../assets/pic5.jpg'
-  ];
-
-  materials: string[] = [
-    'Cedar',
-    'Cherry',
-    'Chestnut',
-    'Elm',
-    'Mahogany'
-  ];
-
-  colors: string[] = ['Black', 'Red', 'Gray'];
+  currentProduct: Product;
   quantity: number = 1;
-
-  reviews: any[] = [{}, {}, {}, {}];
-
-  selectedImage: string = this.images[0];
-  selectedColor: string = this.colors[0];
+  selectedImage: string;
+  selectedColor: string;
+  selectedMaterial: string;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private popover: NgbPopoverConfig
+    private popover: NgbPopoverConfig,
+    private productService: DummyDataService,
+    private localstorageService: LocalStorageService
   ) {
     popover.triggers = 'hover';
   }
 
   ngOnInit() {
-    console.log('Is this it: ', this.route.params);
+    this.route.params.subscribe(params => {
+      let itemId = params['id'] - 1;
+      this.currentProduct = this.productService.getProductById(itemId);
+      this.selectedImage = this.currentProduct.coverImg;
+      this.selectedColor = this.currentProduct.colors[0];
+      this.selectedMaterial = this.currentProduct.materials[0];
+    });
   }
 
   decreaseQuantity() {
@@ -71,6 +64,23 @@ export class ProductDetailsComponent implements OnInit {
     if (!this.quantity) {
       this.quantity = 1;
     }
+  }
+
+  changeMaterial(name: string) {
+    this.selectedMaterial = name;
+  }
+
+  addToCart() {
+
+    let item = {
+      id: this.currentProduct.id,
+      color: this.selectedColor,
+      material: this.selectedMaterial,
+      quantity: this.quantity
+    };
+
+    this.localstorageService.add(item);
+
   }
 
 }

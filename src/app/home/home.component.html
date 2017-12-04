@@ -20,9 +20,9 @@
       <div class="product-grid-row row" *ngFor="let products of allProducts | chunkBy: 4">
         <div class="col-md-3 col-sm-6 col-xs-12 product-holder" *ngFor="let product of products">
           <div class="product">
-            <img [src]="product.coverImg" class="img-fluid mx-auto d-block">
+            <img [src]="product.coverImg" class="img-fluid mx-auto d-block" (click)="goToProduct(product.id)">
             <div class="product-details">
-              <p class="heading">{{ product.name }}</p>
+              <p class="heading" (click)="goToProduct(product.id)">{{ product.name }}</p>
               <p class="description">{{ product.shortDiscription }}</p>
               <div class="price-rating">
                 <div class="pull-right price">{{ product.price | currency:'USD'}}</div>

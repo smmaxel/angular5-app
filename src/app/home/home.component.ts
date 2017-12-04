@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { DummyDataService } from '../core/dummy-data.service';
 
 import { Product } from '../core/models/product.interface';
@@ -22,7 +22,8 @@ export class HomeComponent implements OnInit {
     'Name (A-Z)'
   ];
 
-  constructor(private productService: DummyDataService) {}
+  constructor(private router: Router,
+    private productService: DummyDataService) {}
 
   ngOnInit() {
     this.allProducts = this.productService.getProducts();
@@ -30,6 +31,10 @@ export class HomeComponent implements OnInit {
 
   changeFilter(index: number) {
     this.filter = this.filters[index];
+  }
+
+  goToProduct(id: number) {
+    this.router.navigate(['/product/' + id], { replaceUrl: true });
   }
 
 }

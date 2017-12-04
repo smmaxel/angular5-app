@@ -80,7 +80,6 @@ export class ProductDetailsComponent implements OnInit {
     };
 
     this.localstorageService.add(item);
-
   }
 
 }

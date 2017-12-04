@@ -2,20 +2,20 @@
 
   <!-- ToDo: refactor other pages to have this heading class as well -->
   <p class="main-heading">Shopping Cart</p>
-  <div class="row" style="border: 1px solid black; margin-bottom: 30px;" *ngFor="let item of cartItems">
+  <div class="row" style="border: 1px solid black; margin-bottom: 30px;" *ngFor="let item of productsInCart; let i = index;">
     <div class="col-md-4" style="padding: 15px;">
       <div class="d-inline-block align-top">
-        <img src="../../assets/pic2.jpg" class="img-fluid cart-image">
+        <img [src]="item.coverImg" class="img-fluid cart-image">
       </div>
       <div class="d-inline-block align-top" style="margin-left: 5%">
-        <p class="heading">Product One</p>
-        <p class="price">$130</p>
+        <p class="heading">{{ item.name }}</p>
+        <p class="price">{{ item.price | currency:'USD' }}</p>
         <p class="rating">
-          <ngb-rating [rate]="4" max="5" [readonly]="true"></ngb-rating>
+          <ngb-rating [rate]="item.rating" max="5" [readonly]="true"></ngb-rating>
         </p>
         <div class="details">
-          <p>Color: <span>Black</span></p>
-          <p>Material: <span>Cedar</span></p>
+          <p>Color: <span>{{ item.color }}</span></p>
+          <p>Material: <span>{{ item.material }}</span></p>
         </div>
       </div>
     </div>
@@ -25,12 +25,12 @@
         <div class="float-right" style="border-bottom: 2px solid black; padding: 15px 0 20px 15px;">
           <div class="quantity d-inline-block align-top">
             <p>Quantity</p>
-            <input type="text" maxlength="3" autocomplete="0ff">
+            <input type="text" [(ngModel)]="item.quantity" maxlength="3" autocomplete="0ff">
           </div>
     
           <div class="price d-inline-block align-top">
             <p>Price</p>
-            <span>$130</span>
+            <span>{{ item.price | currency:'USD'}}</span>
           </div>
   
           <div class="shipping d-inline-block align-top">
@@ -40,17 +40,17 @@
           </div>
   
           <div class="remove d-inline-block align-top">
-            <span>Remove</span>
+            <span (click)="remove(i)">Remove</span>
           </div>
         </div>
       </div>
 
       <div style="width: 100%; height: 100px; padding-top: 15px;">
         <div class="float-right" style="">
-          <p class="subtotal d-inline-block align-top">Subtotal: <span>$130</span></p>
+          <p class="subtotal d-inline-block align-top">Subtotal: <span>{{ item.quantity * item.price | currency:'USD' }}</span></p>
           <div class="total d-inline-block align-top">
             <p>Shipping: <span>$38</span></p>
-            <p class="float-right">Total: <span>$168</span></p>
+            <p class="float-right">Total: <span>{{ item.quantity * item.price + 38 | currency:'USD' }}</span></p>
           </div>
         </div>
       </div>

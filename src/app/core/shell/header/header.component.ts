@@ -8,14 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
-'Connecticut', 'Delaware', 'District Of Columbia', 'Federated States Of Micronesia', 'Florida', 'Georgia',
-'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
-'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana',
-'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island',
-'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Islands', 'Virginia',
-'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+import { DummyDataService } from '../../dummy-data.service';
 
 @Component({
   selector: 'app-header',
@@ -24,23 +17,27 @@ const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'C
 })
 export class HeaderComponent implements OnInit {
 
+  products: any[];
   searchTerm: any;
   menuHidden = true;
 
-  formatter = (result: string) => result.toUpperCase();
+  formatter = (x: {name: string}) => x.name;
 
   search = (text$: Observable<string>) =>
     text$
       .debounceTime(600)
       .distinctUntilChanged()
       .map(term => term === '' ? []
-        : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+        : this.products.filter(product => product.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 5));
 
 
   constructor(private router: Router,
-              private authenticationService: AuthenticationService) { }
+              private authenticationService: AuthenticationService,
+              private productService: DummyDataService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.products = this.productService.getProducts();
+  }
 
   toggleMenu() {
     this.menuHidden = !this.menuHidden;
@@ -57,7 +54,8 @@ export class HeaderComponent implements OnInit {
   }
 
   itemSelected($event: any) {
-    console.log($event);
+    this.router.navigate(['/product/' + $event.item.id]);
+    this.searchTerm = "";
   }
 
 }

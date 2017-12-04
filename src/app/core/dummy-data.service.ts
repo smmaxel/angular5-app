@@ -209,7 +209,7 @@ export class DummyDataService {
 
   constructor() { }
 
-  getProducts(): any {
+  getProducts(): Product[] {
     return this.products;
   }
 

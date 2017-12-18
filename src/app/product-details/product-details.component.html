@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row product-details">
-    
+  <div *ngIf="contentReady" class="row product-details">
+
     <div class="col-md-7">
       <div class="gallery">
         <div class="main-image">
@@ -11,26 +11,26 @@
             class="img-fluid mx-auto d-inline"
             [ngClass]="{'active': image == selectedImage }" 
             (click)="selectedImage = image"
-            *ngFor="let image of currentProduct.images">
+            *ngFor="let image of product.images">
         </div>
       </div>
     </div>
 
     <div class="col-md-5">
       <div class="content" style="margin-top: 50px;">
-          <p class="name">{{ currentProduct.name }}</p>
-          <p class="price">Now {{ currentProduct.price | currency:'USD'}}</p>
-          <p class="description"><span class="heading">Description</span><br>{{ currentProduct.description }}</p>
-          <p class="rating">
+          <p class="name">{{ product.name }}</p>
+          <p class="price">Now {{ product.price | currency:'USD'}}</p>
+          <p class="description"><span class="heading">Description</span><br>{{ product.description }}</p>
+          <!-- <p class="rating">
             <label style="text-decoration: none; margin-left: 0;">Rating:</label>
             <ngb-rating [rate]="currentProduct.rating" max="5" [readonly]="true"></ngb-rating>
             <label>{{ currentProduct.reviews.length }} reviews</label>
-          </p>
+          </p> -->
           <div class="customization">
             <label class="d-inline-block align-top">Color:</label>
             <div class="colors d-inline-block">
               <span class="d-inline"
-              *ngFor="let color of currentProduct.colors"
+              *ngFor="let color of product.colors"
               [style.background]="color"
               [ngClass]="{'active': selectedColor == color }"
               (click)="selectedColor = color"
@@ -41,7 +41,7 @@
             <br>
             <label style="margin-top: 10px;">Material:</label>
             <select class="custom-select" (change)="changeMaterial($event.target.value)">
-                <option *ngFor="let material of currentProduct.materials">{{ material }}</option>
+                <option *ngFor="let material of product.materials">{{ material }}</option>
               </select>
             <br>
             <label style="margin-top: 10px;">Quantity:</label>
@@ -66,12 +66,12 @@
 
   </div>
 
-  <div class="reviews">
+  <div *ngIf="contentReady" class="reviews">
       <p class="name">Reviews</p>
-      <div class="row reviews-content" *ngFor="let review of currentProduct.reviews">
+      <div class="row reviews-content" *ngFor="let review of reviews">
         <div class="col-md-8">
           <div class="review-description">
-              <h5>{{ review.mainHeading }}</h5>
+              <h5>{{ review.heading }}</h5>
               <p>{{ review.description }}</p>
           </div>
 
@@ -79,11 +79,11 @@
             <label>Helpfull?</label>
               <button type="button" class="btn btn-secondary">
                   <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                  {{ review.wasHelpfull }}
+                  {{ review.was_helpful }}
               </button>
               <button type="button" class="btn btn-secondary">
                   <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                  {{ review.notHelpfull }}
+                  {{ review.not_helpful }}
               </button>
           </div>
         </div>
@@ -91,16 +91,16 @@
         <div class="col-md-4 d-flex justify-content-center align-items-center">
           <div class="review-rating">
             <label>Quality:</label>
-            <ngb-rating [rate]="review.qualityRate" max="5" [readonly]="true"></ngb-rating>
+            <ngb-rating [rate]="review.quality_rating" max="5" [readonly]="true"></ngb-rating>
             
             <label>Design:</label>
-            <ngb-rating [rate]="review.designRate" max="5" [readonly]="true"></ngb-rating>
+            <ngb-rating [rate]="review.design_rating" max="5" [readonly]="true"></ngb-rating>
             
             <label>Comfort:</label>
-            <ngb-rating [rate]="review.comfortRate" max="5" [readonly]="true"></ngb-rating>
+            <ngb-rating [rate]="review.comfort_rating" max="5" [readonly]="true"></ngb-rating>
             
-            <label>Studirnes:</label>
-            <ngb-rating [rate]="review.studirnes" max="5" [readonly]="true"></ngb-rating>
+            <label>Value:</label>
+            <ngb-rating [rate]="review.value_rating" max="5" [readonly]="true"></ngb-rating>
           </div>
         </div>
       </div>

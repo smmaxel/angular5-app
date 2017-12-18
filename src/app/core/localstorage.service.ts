@@ -1,19 +1,26 @@
+import { Injectable } from '@angular/core';
+import { MessageService } from './message.service';
 const cart = "angular5-cart";
 
+@Injectable()
 export class LocalStorageService {
 
-  constructor() { }
+  constructor(private messageService: MessageService) { }
 
   get(): any[] {
     return this.getFromLocalStorage() || [];
+  }
+
+  getNumberOfItems(): void {
+    this.messageService.sendMessage(this.get().length);
   }
 
   add(product: any) {
     let allItems = this.get();
     let matchedItem = false;
 
-    allItems.forEach(function(item) {
-      if (product.id == item.id && product.color == item.color && product.material == item.material) {
+    allItems.forEach(function(item: any) {
+      if (product.id === item.id && product.color === item.color && product.material === item.material) {
         item.quantity += product.quantity;
         matchedItem = true;
       }
@@ -24,12 +31,14 @@ export class LocalStorageService {
     }
 
     this.setToLocalStorage(allItems);
+    this.getNumberOfItems();
   }
 
   remove(id: number) {
     let allItems = this.get();
     allItems.splice(id, 1);
     this.setToLocalStorage(allItems);
+    this.getNumberOfItems();
   }
 
   private getFromLocalStorage() {

@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { element } from 'protractor';
 import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
-import { DummyDataService } from '../core/dummy-data.service';
+import {EndpointService } from '../core/endpoint.service';
 import { LocalStorageService } from '../core/localstorage.service';
-
-import { Product } from '../core/models/product.interface';
 
 @Component({
   selector: 'app-product',
@@ -15,17 +13,28 @@ import { Product } from '../core/models/product.interface';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  currentProduct: Product;
-  quantity: number = 1;
+  contentReady: boolean = false;
+
+  // ToDo: interface
+  product: any = {
+    images: [],
+    materials: [],
+    colors: []
+  };
+
+  // ToDo: interface
+  reviews: any[] = [];
+
   selectedImage: string;
   selectedColor: string;
   selectedMaterial: string;
+  quantity: number = 1;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private popover: NgbPopoverConfig,
-    private productService: DummyDataService,
+    private endpointService: EndpointService,
     private localstorageService: LocalStorageService
   ) {
     popover.triggers = 'hover';
@@ -33,22 +42,43 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      let itemId = params['id'] - 1;
-      this.currentProduct = this.productService.getProductById(itemId);
-      this.selectedImage = this.currentProduct.coverImg;
-      this.selectedColor = this.currentProduct.colors[0];
-      this.selectedMaterial = this.currentProduct.materials[0];
+      let itemId = params['id'];
+
+      this.endpointService
+        .getServerRequest('product/' + itemId)
+        .subscribe((data: any) => {
+          this.product = data.data
+          this.product.images = this.parseJSON(this.product.images);
+          this.product.materials = this.parseJSON(this.product.materials);
+          this.product.colors = this.parseJSON(this.product.colors);
+          this.initOptions();
+        });
+
+        this.endpointService
+          .getServerRequest('reviews/' + itemId)
+          .subscribe((data: any) => this.reviews = data.data);
     });
+  }
+
+  parseJSON(string: string) {
+    return JSON.parse(string);
+  }
+
+  initOptions() {
+    this.selectedImage = this.product.images[0];
+    this.selectedColor = this.product.colors[0];
+    this.selectedMaterial = this.product.materials[0];
+    this.contentReady = true;
+  }
+
+  increaseQuantity() {
+    this.quantity++;
   }
 
   decreaseQuantity() {
     if (this.quantity > 1) {
       this.quantity--;
     }
-  }
-
-  increaseQuantity() {
-    this.quantity++;
   }
 
   validateQuantity(event: any) {
@@ -71,9 +101,8 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart() {
-
     let item = {
-      id: this.currentProduct.id,
+      id: this.product.id,
       color: this.selectedColor,
       material: this.selectedMaterial,
       quantity: this.quantity

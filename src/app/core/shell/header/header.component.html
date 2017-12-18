@@ -22,7 +22,10 @@
         </div>
 
         <div class="nav-item cart d-inline-block">
-          <a class="nav-link" routerLink="/shopping-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+          <a class="nav-link" routerLink="/shopping-cart">
+            <span *ngIf="itemsInCart > 0" class="badge badge-danger">{{itemsInCart}}</span>
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          </a>
         </div>
 
         <div class="nav-item d-inline-block" ngbDropdown placement="bottom-right">

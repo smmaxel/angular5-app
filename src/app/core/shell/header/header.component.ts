@@ -1,21 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../../authentication/authentication.service';
 
 import {Observable} from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import { DummyDataService } from '../../dummy-data.service';
+import { MessageService } from '../../message.service';
+import { LocalStorageService } from '../../localstorage.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+
+  itemsInCart: number = 0;
+  subscription: Subscription;
 
   products: any[];
   searchTerm: any;
@@ -33,10 +39,19 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router: Router,
               private authenticationService: AuthenticationService,
-              private productService: DummyDataService) { }
+              private productService: DummyDataService,
+              private messageService: MessageService,
+              private localstorageService: LocalStorageService) {
+                this.subscription = this.messageService.getMessage().subscribe(numItems => { this.itemsInCart = numItems; });
+              }
 
   ngOnInit() {
     this.products = this.productService.getProducts();
+    this.localstorageService.getNumberOfItems();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   toggleMenu() {

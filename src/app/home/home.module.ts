@@ -7,6 +7,7 @@ import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { NgPipesModule } from '../../../node_modules/ng-pipes';
+import { FilterPipe } from './home.filter';
 
 // components
 import { HomeComponent } from './home.component';
@@ -15,6 +16,7 @@ import { HomeComponent } from './home.component';
 import { QuoteService } from './quote.service';
 import { FormsModule } from '@angular/forms';
 import { DummyDataService } from '../core/dummy-data.service';
+import { EndpointService } from '../core/endpoint.service';
 
 @NgModule({
 
@@ -30,13 +32,15 @@ import { DummyDataService } from '../core/dummy-data.service';
 
   // imported components
   declarations: [
-    HomeComponent
+    HomeComponent,
+    FilterPipe
   ],
 
   // uased providers (directives and services)
   providers: [
     QuoteService,
-    DummyDataService
+    DummyDataService,
+    EndpointService
   ]
 })
 export class HomeModule { }

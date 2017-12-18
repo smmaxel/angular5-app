@@ -8,7 +8,9 @@ import { ProductDetailsRoutingModule } from './product-details-routing.module';
 import { ProductDetailsComponent } from './product-details.component';
 
 import { DummyDataService } from '../core/dummy-data.service';
+import { EndpointService } from '../core/endpoint.service';
 import { LocalStorageService } from '../core/localstorage.service';
+
 
 @NgModule({
   imports: [
@@ -24,6 +26,7 @@ import { LocalStorageService } from '../core/localstorage.service';
   ],
   providers: [
     DummyDataService,
+    EndpointService,
     LocalStorageService
   ]
 })

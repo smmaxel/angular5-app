@@ -15,6 +15,9 @@ import { I18nService } from './i18n.service';
 import { HttpService } from './http/http.service';
 import { HttpCacheService } from './http/http-cache.service';
 
+import { MessageService } from './message.service';
+import { LocalStorageService } from './localstorage.service';
+
 export function createHttpService(backend: ConnectionBackend,
                                   defaultOptions: RequestOptions,
                                   httpCacheService: HttpCacheService) {
@@ -46,6 +49,7 @@ export function createHttpService(backend: ConnectionBackend,
     AuthenticationGuard,
     I18nService,
     HttpCacheService,
+    MessageService,
     {
       provide: Http,
       deps: [XHRBackend, RequestOptions, HttpCacheService],

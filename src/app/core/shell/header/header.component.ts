@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { DummyDataService } from '../../dummy-data.service';
+import { EndpointService } from '../../endpoint.service';
 import { MessageService } from '../../message.service';
 import { LocalStorageService } from '../../localstorage.service';
 
@@ -39,14 +39,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private authenticationService: AuthenticationService,
-              private productService: DummyDataService,
+              private endpointService: EndpointService,
               private messageService: MessageService,
               private localstorageService: LocalStorageService) {
                 this.subscription = this.messageService.getMessage().subscribe(numItems => { this.itemsInCart = numItems; });
               }
 
   ngOnInit() {
-    this.products = this.productService.getProducts();
+
+    this.endpointService
+      .getServerRequest('products')
+      .subscribe((data: any) => {this.products = data.data});
+
     this.localstorageService.getNumberOfItems();
   }
 
@@ -70,7 +74,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   itemSelected($event: any) {
     this.router.navigate(['/product/' + $event.item.id]);
-    this.searchTerm = "";
   }
 
 }

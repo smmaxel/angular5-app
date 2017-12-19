@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.endpointService
       .getServerRequest('products')
-      .subscribe((data: any) => {this.allProducts = this.convertToInteger(data.data);});
+      .subscribe((data: any) => {this.allProducts = this.convertToInteger(data.data)});
   }
 
   convertToInteger(data: any[]) {

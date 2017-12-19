@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { DummyDataService } from '../core/dummy-data.service';
+import { EndpointService } from '../core/endpoint.service';
 import { LocalStorageService } from '../core/localstorage.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -10,34 +11,35 @@ import { LocalStorageService } from '../core/localstorage.service';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  cartItems: any[] = [{}, {}, {}, {}];
-
-  availableProducts: any[];
   productsInCart: any[];
+  products: any[];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private productService: DummyDataService,
+    private endpointService: EndpointService,
     private localstorageService: LocalStorageService
   ) { }
 
   ngOnInit() {
-    this.availableProducts = this.productService.getProducts();
-    this.productsInCart = this.getProductDetails(this.localstorageService.get(), this.availableProducts);
-    console.log(this.productsInCart);
-  }
+    this.products = this.localstorageService.get();
 
-  getProductDetails(cartProducts: any, allProducts: any) {
-    cartProducts.forEach(function(cartProduct: any) {
-      allProducts.forEach(function(product: any) {
-        if (cartProduct.id === product.id) {
-          Object.assign(cartProduct, product);
-        }
-      })
+    let productIds: any[] = [];
+    _.forEach(this.products, function(o: any) {
+      productIds.push(o.id);
     });
 
-    return cartProducts;
+    this.endpointService
+      .getServerRequest('products/' + productIds.join())
+      .subscribe((data: any) => this.productsInCart = this.addDetails(data.data));
+  }
+
+  addDetails(data: any[]) {
+    _.map(this.products, function(o: any) {
+      _.merge(o, _.find(data, {id: o.id}));
+    });
+
+    return this.products;
   }
 
   remove(id: number) {

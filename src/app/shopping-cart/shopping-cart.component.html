@@ -3,9 +3,9 @@
   <!-- ToDo: refactor other pages to have this heading class as well -->
   <p class="main-heading">Shopping Cart</p>
   <div class="row" style="border: 1px solid black; margin-bottom: 30px;" *ngFor="let item of productsInCart; let i = index;">
-    <div class="col-md-4" style="padding: 15px;">
+    <div class="col-md-6" style="padding: 15px;">
       <div class="d-inline-block align-top">
-        <img [src]="item.coverImg" class="img-fluid cart-image">
+        <img [src]="item.image" class="img-fluid cart-image">
       </div>
       <div class="d-inline-block align-top" style="margin-left: 5%">
         <p class="heading">{{ item.name }}</p>
@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="col-md-8" style="padding: 15px; padding-right: 5%">
+    <div class="col-md-6" style="padding: 15px; padding-right: 5%">
       <div style="width: 100%; height: 100px;">
         <div class="float-right" style="border-bottom: 2px solid black; padding: 15px 0 20px 15px;">
           <div class="quantity d-inline-block align-top">

@@ -1,5 +1,7 @@
 # test-app
 
+Live preview: https://angular5app.000webhostapp.com/
+
 This project was generated with [ngX-Rocket](https://github.com/ngx-rocket/generator-ngx-rocket/)
 version 2.4.0
 
@@ -24,7 +26,11 @@ e2e/                         end-to-end tests
 src/                         project source code
 |- app/                      app components
 |  |- core/                  core module (singleton services and single-use components)
+|  |- home/                  home module (landing page)
+|  |- login/                 login module (handles session and user authentication)
+|  |- product-details/       product details module (allows customization and adding to cart)
 |  |- shared/                shared module  (common components, directives and pipes)
+|  |- shopping-cart/         shopping cart module (preview products added to cart and allows their removal)
 |  |- app.component.*        app root component (shell)
 |  |- app.module.ts          app root module definition
 |  |- app-routing.module.ts  app routes

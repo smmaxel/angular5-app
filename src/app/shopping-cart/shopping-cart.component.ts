@@ -29,9 +29,11 @@ export class ShoppingCartComponent implements OnInit {
       productIds.push(o.id);
     });
 
-    this.endpointService
-      .getServerRequest('products/' + productIds.join())
-      .subscribe((data: any) => this.productsInCart = this.addDetails(data.data));
+    if (productIds.length > 0) {
+      this.endpointService
+        .getServerRequest('products/' + productIds.join())
+        .subscribe((data: any) => this.productsInCart = this.addDetails(data.data));
+    }
   }
 
   addDetails(data: any[]) {
@@ -45,6 +47,10 @@ export class ShoppingCartComponent implements OnInit {
   remove(id: number) {
     this.localstorageService.remove(id);
     this.productsInCart.splice(id, 1);
+  }
+
+  goToProduct(id: number) {
+    this.router.navigate(['/product/' + id], { replaceUrl: true });
   }
 
  }

@@ -5,7 +5,7 @@
   <div class="row" style="border: 1px solid black; margin-bottom: 30px;" *ngFor="let item of productsInCart; let i = index;">
     <div class="col-md-6" style="padding: 15px;">
       <div class="d-inline-block align-top">
-        <img [src]="item.image" class="img-fluid cart-image">
+        <img [src]="item.image" class="img-fluid cart-image" (click)="goToProduct(item.id)">
       </div>
       <div class="d-inline-block align-top" style="margin-left: 5%">
         <p class="heading">{{ item.name }}</p>
